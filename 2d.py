@@ -14,6 +14,11 @@ character = load_image('character.png')
 x=0
 y=90
 
+
+radius = 10
+angle = 0
+angular_speed = 0.05
+
 while(1):
     clear_canvas_now()
     
@@ -32,57 +37,32 @@ while(1):
         character.draw_now(x,y)
         delay(0.01)
         
-    while(y>60):
+    while(y>90):
         clear_canvas_now()
         grass.draw_now(400,30)
         y=y-1
         character.draw_now(x,y)
         delay(0.01)
 
+        
+    clear_canvas_now()     
+    x=400
+    y=90
+    character.draw_now(x,y)
+    delay(0.01)
     
-    while(y<300):
-        a=1
+    while(1):
         clear_canvas_now()
         grass.draw_now(400,30)
-        x=x+a
-        y=y+1
-        character.draw_now(x,y)
-        delay(0.01)
-        a+=1
-
-    while(y<600):
-        a=1
-        clear_canvas_now()
-        grass.draw_now(400,30)
-        x=x-a
-        y=y+1
-        character.draw_now(x,y)
-        delay(0.01)
-        a+=1
         
-    while(y>300):
-        a=1
-        clear_canvas_now()
-        grass.draw_now(400,30)
-        x=x-a
-        y=y-1
-        character.draw_now(x,y)
+        x = x + radius * math.cos(angle)
+        y = y + radius * math.sin(angle)
+        character.draw_now(x, y)
+
         delay(0.01)
-        a+=1
-
-    while(y>0):
-        a=1
-        clear_canvas_now()
-        grass.draw_now(400,30)
-        x=x+a
-        y=y-1
-        character.draw_now(x,y)
-        delay(0.01)
-        a+=1
-
-        
-   
-
-
+        angle += angular_speed
+  
+        if angle >= 2 * math.pi:
+            break
 
 close_canvas()
